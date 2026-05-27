@@ -1,7 +1,6 @@
 package com.nightwielder.apothicrenaming.handler;
 
 import com.nightwielder.apothicrenaming.ApothicRenaming;
-import com.nightwielder.apothicrenaming.Config;
 import com.nightwielder.apothicrenaming.util.ApotheosisDetector;
 import dev.shadowsoffire.apotheosis.Apoth;
 import dev.shadowsoffire.apotheosis.affix.AffixHelper;
@@ -21,7 +20,6 @@ public final class AnvilRenameOverride {
 
     @SubscribeEvent
     public static void onAnvilUpdate(AnvilUpdateEvent event) {
-        if (!Config.ENABLED.get()) return;
         if (!ApotheosisDetector.isApotheosisLoaded()) return;
         ItemStack left = event.getLeft();
         if (left.isEmpty()) return;
