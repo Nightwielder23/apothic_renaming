@@ -20,12 +20,20 @@ public final class AnvilRenameOverride {
 
     @SubscribeEvent
     public static void onAnvilUpdate(AnvilUpdateEvent event) {
-        if (!ApotheosisDetector.isApotheosisLoaded()) return;
+        if (!ApotheosisDetector.isApotheosisLoaded()) {
+            return;
+        }
         ItemStack left = event.getLeft();
-        if (left.isEmpty()) return;
-        if (!left.has(Apoth.Components.AFFIX_NAME)) return;
+        if (left.isEmpty()) {
+            return;
+        }
+        if (!left.has(Apoth.Components.AFFIX_NAME)) {
+            return;
+        }
         String name = event.getName();
-        if (name == null || name.isEmpty()) return;
+        if (name == null || name.isEmpty()) {
+            return;
+        }
         ItemStack output = left.copy();
         output.set(DataComponents.CUSTOM_NAME, Component.literal(name));
         Style wrapperStyle = Style.EMPTY;
@@ -36,7 +44,7 @@ public final class AnvilRenameOverride {
         // %2$s mirrors Apoth's Sigil of Unnaming: the affix-name template normally renders as
         // "<prefix> %1$s <suffix>" wrapping the item's base name. Replacing it with "%2$s" plus
         // two empty args collapses the wrapper to nothing, letting vanilla's CUSTOM_NAME show through.
-        // We keep the AFFIX_NAME component present (just retemplated) because Apoth checks for the
+        // The AFFIX_NAME component stays present (just retemplated) because Apoth checks for the
         // marker's existence in tooltip/rendering paths; stripping it would break those expectations.
         // Italic is intentionally not forced false here. Vanilla renders CUSTOM_NAME in italic by
         // default at the renderer level, so leaving the wrapper style untouched preserves the
